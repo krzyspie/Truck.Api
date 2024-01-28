@@ -28,9 +28,6 @@ app.UseSerilogRequestLogging();
 
 app.UseHttpsRedirection();
 
-app.MapGet("/", () =>
-{
-    return string.Empty;
-});
+app.MapTruckEndpoints();
 
 app.Run();
