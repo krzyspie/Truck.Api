@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Domain.Abstractions;
+using Infrastructure.Repositories;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Infrastructure
 {
@@ -6,6 +8,8 @@ namespace Infrastructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
+            services.AddScoped<ITruckRepository, TruckRepository>();
+
             return services;
         }
     }

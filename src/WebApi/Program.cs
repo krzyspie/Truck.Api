@@ -2,6 +2,7 @@ using Application;
 using Infrastructure;
 using Presentation;
 using Serilog;
+using WebApi.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +24,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseMiddleware<ValidationExceptionMiddleware>();
 
 app.UseSerilogRequestLogging();
 
