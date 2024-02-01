@@ -7,6 +7,32 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Sql\spTruck_Delete.sql" />
+    <None Remove="Sql\spTruck_Delete_Rollback.sql" />
+    <None Remove="Sql\spTruck_GetById.sql" />
+    <None Remove="Sql\spTruck_GetById_Rollback.sql" />
+    <None Remove="Sql\spTruck_Insert.sql" />
+    <None Remove="Sql\spTruck_Insert_Rollback.sql" />
+    <None Remove="Sql\spTruck_Update.sql" />
+    <None Remove="Sql\spTruck_Update_Rollback.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Sql\spTruck_Delete.sql" />
+    <EmbeddedResource Include="Sql\spTruck_Delete_Rollback.sql" />
+    <EmbeddedResource Include="Sql\spTruck_GetById_Rollback.sql" />
+    <EmbeddedResource Include="Sql\spTruck_GetById.sql" />
+    <EmbeddedResource Include="Sql\spTruck_Insert.sql" />
+    <EmbeddedResource Include="Sql\spTruck_Insert_Rollback.sql" />
+    <EmbeddedResource Include="Sql\spTruck_Update.sql" />
+    <EmbeddedResource Include="Sql\spTruck_Update_Rollback.sql" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dapper" Version="2.1.28" />
+    <PackageReference Include="FluentMigrator" Version="5.0.0" />
+    <PackageReference Include="FluentMigrator.Runner.SqlServer" Version="5.0.0" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="8.0.0" />
   </ItemGroup>
 

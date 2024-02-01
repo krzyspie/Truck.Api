@@ -2,7 +2,7 @@
 {
     public interface ITruckRepository
     {
-        void Create();
+        Task Create();
         void Update();
         void Delete();
         void Get();
