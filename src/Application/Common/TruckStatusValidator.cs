@@ -8,7 +8,7 @@ namespace Application.Common
 {
     public class TruckStatusValidator<T> : IAsyncPropertyValidator<T, UpdateTruckStatusCommand>
     {
-        private readonly Dictionary<TruckStatus, TruckStatus> statusesMap = new Dictionary<TruckStatus, TruckStatus>
+        private readonly Dictionary<TruckStatus, TruckStatus> statusesMap = new()
         {
             { TruckStatus.Loading, TruckStatus.ToJob },
             { TruckStatus.ToJob, TruckStatus.AtJob },
@@ -28,6 +28,10 @@ namespace Application.Common
 
         public async Task<bool> IsValidAsync(ValidationContext<T> context, UpdateTruckStatusCommand value, CancellationToken cancellation)
         {
+            if (value.Status == TruckStatus.OutOfService)
+            {
+                return true;
+            }
             var truck = await _truckRepository.GetByIdAsync(value.Id);
 
             if (truck is null || truck.Status == TruckStatus.OutOfService)
