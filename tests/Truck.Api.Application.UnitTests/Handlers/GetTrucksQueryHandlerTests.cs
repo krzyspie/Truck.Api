@@ -7,16 +7,19 @@ namespace Application.UnitTests.Handlers
 {
     public class GetTrucksQueryHandlerTests
     {
-        [Fact]
-        public async Task Handle_ValidQuery_ReturnsTruckResponses()
+        [Theory]
+        [InlineData("asc", "asc")]
+        [InlineData("ascending", "asc")]
+        [InlineData("desc", "desc")]
+        [InlineData("descending", "desc")]
+        public async Task Handle_ValidQuery_ReturnsTruckResponses(string sortDirectionSetByUser, string sortDirectionPassedToMethod)
         {
             // Arrange
             string filterBy = "Status";
             string filterValue = "Active";
             string sortBy = "Name";
-            string sortDirection = "ASC";
             
-            var query = new GetTrucksQuery(filterBy, filterValue, sortBy, sortDirection);
+            var query = new GetTrucksQuery(filterBy, filterValue, sortBy, sortDirectionSetByUser);
 
             var trucks = new List<Domain.Entities.Truck>
             {
@@ -45,7 +48,7 @@ namespace Application.UnitTests.Handlers
                 Assert.Equal(trucks[i].Description, result.ElementAt(i).Description);
             }
 
-            await truckRepository.Received(1).Get(filterBy, filterValue, sortBy, sortDirection);
+            await truckRepository.Received(1).Get(filterBy, filterValue, sortBy, sortDirectionPassedToMethod);
         }
     }
 }
