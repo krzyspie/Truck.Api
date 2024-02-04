@@ -2,5 +2,5 @@
 
 namespace Application.Truck.Delete
 {
-    public sealed record DeleteTruckCommand(ulong TruckId) : IRequest;
+    public sealed record DeleteTruckCommand(int TruckId) : IRequest;
 }

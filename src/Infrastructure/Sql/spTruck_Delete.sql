@@ -5,6 +5,6 @@ CREATE PROCEDURE [dbo].[spTruck_Delete]
 	@Id INT
 AS
 BEGIN
-	DELETE FROM dbo.[Truck] WHERE Id = @Id;
+	DELETE FROM dbo.[Trucks] WHERE Id = @Id;
 END
 

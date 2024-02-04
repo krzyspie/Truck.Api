@@ -18,7 +18,7 @@ namespace Infrastructure
                 var configuration = serviceProvider.GetRequiredService<IConfiguration>();
 
                 var connectionString = configuration.GetConnectionString("truckDb") ??
-                                       throw new ApplicationException("Connectionstring not provided.");
+                                       throw new ApplicationException("Connection string not provided.");
 
                 return new SqlConnectionFactory(connectionString);
             });
@@ -29,8 +29,7 @@ namespace Infrastructure
                 .ConfigureRunner(config => config
                 .AddSqlServer()
                 .WithGlobalConnectionString(configuration.GetConnectionString("truckDb"))
-                .ScanIn(typeof(DependencyInjection).Assembly).For.Migrations()
-                .ScanIn(typeof(DependencyInjection).Assembly).For.EmbeddedResources())
+                .ScanIn(typeof(DependencyInjection).Assembly).For.Migrations().For.EmbeddedResources())
                 .AddLogging(config => config.AddFluentMigratorConsole());
 
             return services;

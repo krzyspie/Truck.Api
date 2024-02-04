@@ -23,8 +23,8 @@ namespace Application.Behaviors
             var context = new ValidationContext<TRequest>(request);
 
             var errors = _validators
-                .Select(x => x.Validate(context))
-                .SelectMany(x => x.Errors)
+                .Select(async x => await x.ValidateAsync(context))
+                .SelectMany(x => x.Result.Errors)
                 .Where(x => x != null)
                 .Distinct()
                 .ToArray();

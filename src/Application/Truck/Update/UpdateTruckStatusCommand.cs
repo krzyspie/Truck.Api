@@ -1,6 +1,7 @@
-﻿using MediatR;
+﻿using Domain.Enums;
+using MediatR;
 
 namespace Application.Truck.Update
 {
-    public sealed record UpdateTruckStatusCommand(ulong TruckId, string Status) : IRequest;
+    public sealed record UpdateTruckStatusCommand(int Id, TruckStatus Status) : IRequest<Unit>;
 }

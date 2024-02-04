@@ -7,24 +7,36 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Sql\spTruck_CheckTruckWithCodeExists.sql" />
+    <None Remove="Sql\spTruck_CheckTruckWithCodeExists_Rollback.sql" />
     <None Remove="Sql\spTruck_Delete.sql" />
     <None Remove="Sql\spTruck_Delete_Rollback.sql" />
     <None Remove="Sql\spTruck_GetById.sql" />
     <None Remove="Sql\spTruck_GetById_Rollback.sql" />
+    <None Remove="Sql\spTruck_GetFilteredAndSorted.sql" />
+    <None Remove="Sql\spTruck_GetFilteredAndSorted_Rollback.sql" />
     <None Remove="Sql\spTruck_Insert.sql" />
     <None Remove="Sql\spTruck_Insert_Rollback.sql" />
     <None Remove="Sql\spTruck_Update.sql" />
+    <None Remove="Sql\spTruck_UpdateStatus.sql" />
+    <None Remove="Sql\spTruck_UpdateStatus_Rollback.sql" />
     <None Remove="Sql\spTruck_Update_Rollback.sql" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Include="Sql\spTruck_Delete.sql" />
     <EmbeddedResource Include="Sql\spTruck_Delete_Rollback.sql" />
+    <EmbeddedResource Include="Sql\spTruck_GetFilteredAndSorted_Rollback.sql" />
+    <EmbeddedResource Include="Sql\spTruck_GetFilteredAndSorted.sql" />
     <EmbeddedResource Include="Sql\spTruck_GetById_Rollback.sql" />
     <EmbeddedResource Include="Sql\spTruck_GetById.sql" />
+    <EmbeddedResource Include="Sql\spTruck_CheckTruckWithCodeExists.sql" />
     <EmbeddedResource Include="Sql\spTruck_Insert.sql" />
+    <EmbeddedResource Include="Sql\spTruck_CheckTruckWithCodeExists_Rollback.sql" />
     <EmbeddedResource Include="Sql\spTruck_Insert_Rollback.sql" />
+    <EmbeddedResource Include="Sql\spTruck_UpdateStatus.sql" />
     <EmbeddedResource Include="Sql\spTruck_Update.sql" />
+    <EmbeddedResource Include="Sql\spTruck_UpdateStatus_Rollback.sql" />
     <EmbeddedResource Include="Sql\spTruck_Update_Rollback.sql" />
   </ItemGroup>
 

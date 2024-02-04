@@ -1,12 +1,21 @@
-﻿using MediatR;
+﻿using Domain.Abstractions;
+using MediatR;
 
 namespace Application.Truck.Update
 {
-    public class UpdateTruckStatusCommandHandler : IRequestHandler<UpdateTruckStatusCommand>
+    public class UpdateTruckStatusCommandHandler : IRequestHandler<UpdateTruckStatusCommand, Unit>
     {
-        public Task Handle(UpdateTruckStatusCommand request, CancellationToken cancellationToken)
+        private readonly ITruckRepository _truckRepository;
+
+        public UpdateTruckStatusCommandHandler(ITruckRepository truckRepository)
         {
-            throw new NotImplementedException();
+            _truckRepository = truckRepository;
+        }
+        public async Task<Unit> Handle(UpdateTruckStatusCommand request, CancellationToken cancellationToken)
+        {
+            await _truckRepository.UpdateStatusAync(request.Id, request.Status.ToString());
+
+            return Unit.Value;
         }
     }
 }

@@ -2,7 +2,7 @@
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using System.Reflection;
+using Application.Common;
 
 namespace Application
 {
@@ -14,7 +14,12 @@ namespace Application
 
             services.AddMediatR(config => config.RegisterServicesFromAssembly(assembly));
             services.AddValidatorsFromAssembly(assembly);
+            services.AddScoped(typeof(TruckCodeUniqueValidator<>));
+            services.AddScoped(typeof(TruckNotExistsValidator<>));
+            services.AddScoped(typeof(TruckStatusValidator<>));
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+
             return services;
         }
     }

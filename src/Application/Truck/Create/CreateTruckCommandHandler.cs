@@ -14,9 +14,9 @@ namespace Application.Truck.Create
 
         public async Task<int> Handle(CreateTruckCommand request, CancellationToken cancellationToken)
         {
-            await _truckRepository.Create();
+            int truckId = await _truckRepository.CreateAsync(request.Code, request.Name, request.Status.ToString(), request.Description);
 
-            return await Task.FromResult(11);
+            return truckId;
         }
     }
 }

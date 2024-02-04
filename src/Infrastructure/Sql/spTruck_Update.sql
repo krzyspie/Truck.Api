@@ -5,8 +5,8 @@ CREATE PROCEDURE [dbo].[spTruck_Update]
 	@Id INT,
 	@Code NVARCHAR(7),
 	@Name NVARCHAR(20),
-	@Status TINYINT,
-	@Description NVARCHAR(255)
+	@Status NVARCHAR(20),
+	@Description NVARCHAR(255) = NULL
 AS
 BEGIN
 	UPDATE dbo.[Trucks]

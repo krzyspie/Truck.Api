@@ -25,7 +25,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.Services.Migrate();
-app.UseMiddleware<ValidationExceptionMiddleware>();
+app.UseMiddleware<ExceptionHandlerMiddleware>();
 
 app.UseSerilogRequestLogging();
 

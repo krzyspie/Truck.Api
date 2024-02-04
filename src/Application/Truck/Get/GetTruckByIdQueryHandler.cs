@@ -1,12 +1,25 @@
-﻿using MediatR;
+﻿using Application.Common;
+using Domain.Abstractions;
+using Domain.Exceptions;
+using Mapster;
+using MediatR;
 
 namespace Application.Truck.Get
 {
-    public class GetTruckByIdQueryHandler : IRequestHandler<GetTruckByIdQuery>
+    public class GetTruckByIdQueryHandler : IRequestHandler<GetTruckByIdQuery, TruckResponse>
     {
-        public Task Handle(GetTruckByIdQuery request, CancellationToken cancellationToken)
+        private readonly ITruckRepository _truckRepository;
+
+        public GetTruckByIdQueryHandler(ITruckRepository truckRepository)
         {
-            throw new NotImplementedException();
+            _truckRepository = truckRepository;
+        }
+
+        public async Task<TruckResponse> Handle(GetTruckByIdQuery request, CancellationToken cancellationToken)
+        {
+            var truck = await _truckRepository.GetByIdAsync(request.Id);
+
+            return truck is not null ? truck.Adapt<TruckResponse>() : throw new TruckNotFoundException(request.Id);
         }
     }
 }

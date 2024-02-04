@@ -17,11 +17,10 @@ namespace Infrastructure.Migrations
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Code").AsString(7).Unique()
                 .WithColumn("Name").AsString(20)
-                .WithColumn("Status").AsByte()
+                .WithColumn("Status").AsString(20)
                 .WithColumn("Description").AsString().Nullable()
                 .WithColumn("DateCreated").AsDateTime()
                 .WithColumn("DateModified").AsDateTime().Nullable();
-            //Execute.EmbeddedScript("spTruck_GetById.sql");
         }
     }
 }
