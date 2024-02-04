@@ -11,7 +11,7 @@ namespace Application.Truck.Update
         {
             RuleFor(x => x.Status).IsInEnum();
             RuleFor(x => x.Id).SetAsyncValidator(truckNotExistsValidator);
-            RuleFor(x => x).SetAsyncValidator(truckStatusValidator);
+            RuleFor(x => new TruckStatusModel(x.Id, x.Status)).SetAsyncValidator(truckStatusValidator);
         }
     }
 }

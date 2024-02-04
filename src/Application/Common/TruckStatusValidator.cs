@@ -1,12 +1,11 @@
-﻿using Application.Truck.Update;
-using Domain.Abstractions;
+﻿using Domain.Abstractions;
 using Domain.Enums;
 using FluentValidation;
 using FluentValidation.Validators;
 
 namespace Application.Common
 {
-    public class TruckStatusValidator<T> : IAsyncPropertyValidator<T, UpdateTruckStatusCommand>
+    public class TruckStatusValidator<T> : IAsyncPropertyValidator<T, TruckStatusModel>
     {
         private readonly Dictionary<TruckStatus, TruckStatus> statusesMap = new()
         {
@@ -26,15 +25,16 @@ namespace Application.Common
 
         public string GetDefaultMessageTemplate(string errorCode) => "Cannot change to given status.";
 
-        public async Task<bool> IsValidAsync(ValidationContext<T> context, UpdateTruckStatusCommand value, CancellationToken cancellation)
+        public async Task<bool> IsValidAsync(ValidationContext<T> context, TruckStatusModel value, CancellationToken cancellation)
         {
             if (value.Status == TruckStatus.OutOfService)
             {
                 return true;
             }
+
             var truck = await _truckRepository.GetByIdAsync(value.Id);
 
-            if (truck is null || truck.Status == TruckStatus.OutOfService)
+            if (truck is null || truck.Status == TruckStatus.OutOfService || truck.Status == value.Status)
             {
                 return true;
             }

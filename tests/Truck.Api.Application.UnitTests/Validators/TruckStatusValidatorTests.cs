@@ -4,6 +4,7 @@ using Domain.Abstractions;
 using Domain.Enums;
 using FluentValidation;
 using NSubstitute;
+using System.Reflection;
 
 namespace Application.UnitTests.Validators
 {
@@ -22,6 +23,11 @@ namespace Application.UnitTests.Validators
         [InlineData(TruckStatus.AtJob, TruckStatus.OutOfService, 0)]
         [InlineData(TruckStatus.Returning, TruckStatus.OutOfService, 0)]
         [InlineData(TruckStatus.Loading, TruckStatus.OutOfService, 0)]
+        [InlineData(TruckStatus.Loading, TruckStatus.Loading, 1)]
+        [InlineData(TruckStatus.OutOfService, TruckStatus.OutOfService, 0)]
+        [InlineData(TruckStatus.ToJob, TruckStatus.ToJob, 1)]
+        [InlineData(TruckStatus.AtJob, TruckStatus.AtJob, 1)]
+        [InlineData(TruckStatus.Returning, TruckStatus.Returning, 1)]
         public async Task IsValidAsync_ValidStatus_ReturnsTrue(TruckStatus from, TruckStatus to, int callsNumber)
         {
             // Arrange
@@ -36,10 +42,10 @@ namespace Application.UnitTests.Validators
             truckRepository.GetByIdAsync(Arg.Any<int>())
                 .Returns(truck);
 
-            var command = new UpdateTruckStatusCommand (id, to);
+            var model = new TruckStatusModel(id, to);
 
             // Act
-            var result = await validator.IsValidAsync(context, command, cancellationToken);
+            var result = await validator.IsValidAsync(context, model, cancellationToken);
 
             // Assert
             Assert.True(result);
@@ -69,10 +75,10 @@ namespace Application.UnitTests.Validators
             truckRepository.GetByIdAsync(Arg.Any<int>())
                 .Returns(truck);
 
-            var command = new UpdateTruckStatusCommand(id, to);
+            var model = new TruckStatusModel(id, to);
 
             // Act
-            var result = await validator.IsValidAsync(context, command, cancellationToken);
+            var result = await validator.IsValidAsync(context, model, cancellationToken);
 
             // Assert
             Assert.False(result);
@@ -93,10 +99,10 @@ namespace Application.UnitTests.Validators
             truckRepository.GetByIdAsync(Arg.Any<int>())
                 .Returns((Domain.Entities.Truck)null);
 
-            var command = new UpdateTruckStatusCommand(id, TruckStatus.Returning);
+            var model = new TruckStatusModel(id, TruckStatus.Returning);
 
             // Act
-            var result = await validator.IsValidAsync(context, command, cancellationToken);
+            var result = await validator.IsValidAsync(context, model, cancellationToken);
 
             // Assert
             Assert.True(result);

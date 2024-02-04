@@ -37,6 +37,15 @@ namespace WebApi.Extensions
                     ExceptionStackTrace = exception.StackTrace
                 });
             }
+            catch (Exception exception)
+            {
+                context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+                await context.Response.WriteAsJsonAsync(new
+                {
+                    Error = exception.Message,
+                    ExceptionStackTrace = exception.StackTrace
+                });
+            }
         }
     }
 }

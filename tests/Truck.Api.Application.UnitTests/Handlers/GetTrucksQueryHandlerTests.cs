@@ -8,10 +8,10 @@ namespace Application.UnitTests.Handlers
     public class GetTrucksQueryHandlerTests
     {
         [Theory]
-        [InlineData("asc", "asc")]
-        [InlineData("ascending", "asc")]
-        [InlineData("desc", "desc")]
-        [InlineData("descending", "desc")]
+        [InlineData("asc", "ASC")]
+        [InlineData("ascending", "ASC")]
+        [InlineData("desc", "DESC")]
+        [InlineData("descending", "DESC")]
         public async Task Handle_ValidQuery_ReturnsTruckResponses(string sortDirectionSetByUser, string sortDirectionPassedToMethod)
         {
             // Arrange
